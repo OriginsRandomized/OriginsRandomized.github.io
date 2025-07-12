@@ -1,1 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minecraft Origins Randomized Modpack</title>
+    
+    <style>
+        /* Google Fonts Import for a pixel/fantasy feel */
+        @import url('https://fonts.googleapis.com/css2?family=VT323&family=Roboto:wght@400;700&display=swap');
 
+        /* GLOBAL STYLES */
+        :root {
+            --primary-bg: #101114; /* Darker background to complement the image */
+            --content-bg: rgba(26, 28, 32, 0.85); /* Semi-transparent card background */
+            --border-color: #4a4d54;
+            --text-color: #e0e0e0;
+            --accent-color: #ff8c00; 
+            --discord-color: #5865F2;
+            --disabled-color: #5c5f66;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--primary-bg);
+            color: var(--text-color);
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* HEADER / NAVIGATION */
+        header {
+            background-color: rgba(16, 17, 20, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 10px 5%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .logo {
+            height: 50px; /* Adjust height as needed */
+            width: auto;
+        }
+        
+        .header-buttons .btn {
+            margin-left: 1rem;
+            padding: 8px 20px;
+            font-size: 1.2rem;
+        }
+
+        /* HERO SECTION WITH BACKGROUND IMAGE */
+        .hero-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            min-height: 100vh;
+            width: 100%;
+            background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://originsrandomized.github.io/images/TitleImage.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Parallax-like effect */
+            padding: 100px 1.5rem 2rem;
+        }
+        
+        .hero-content {
+            background-color: var(--content-bg);
+            padding: 2.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+            max-width: 700px;
+        }
+
+        /* TYPOGRAPHY & CONTENT */
+        h1 {
+            font-family: 'VT323', monospace;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+            font-size: 3.5rem;
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        p.subtitle {
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* BUTTONS */
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            font-family: 'VT323', monospace;
+            text-align: center;
+            text-decoration: none;
+            color: white;
+            border-radius: 5px;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+        }
+        
+        /* Main CTA buttons (larger) */
+        .cta-buttons .btn {
+            padding: 12px 30px;
+            font-size: 1.5rem;
+        }
+
+        .btn-discord { background-color: var(--discord-color); border-color: var(--discord-color); }
+        .btn-discord:hover { background-color: #4752c4; transform: translateY(-3px); box-shadow: 0 6px 20px rgba(88, 101, 242, 0.4); }
+        
+        .btn-download { background-color: var(--accent-color); border-color: var(--accent-color); }
+        .btn-download:hover { background-color: #e67e00; transform: translateY(-3px); box-shadow: 0 6px 20px rgba(255, 140, 0, 0.4); }
+
+        .btn.disabled {
+            background-color: var(--disabled-color); border-color: var(--disabled-color); cursor: not-allowed; position: relative;
+        }
+        .btn.disabled:hover { transform: none; box-shadow: 0 4px 15px rgba(0,0,0,0.4); }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background-color: #101114;
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        /* TOOLTIP */
+        #tooltip {
+            position: fixed; background-color: #111; color: white; padding: 8px 12px; border-radius: 4px; font-size: 0.9rem; font-family: 'Roboto', sans-serif; z-index: 101; pointer-events: none; opacity: 0; transition: opacity 0.2s ease-in-out; white-space: nowrap;
+        }
+
+        /* RESPONSIVE DESIGN */
+        @media (max-width: 600px) {
+            header {
+                flex-direction: column;
+                padding: 10px;
+            }
+            .logo {
+                margin-bottom: 10px;
+            }
+            .header-buttons {
+                display: flex;
+                width: 100%;
+                justify-content: center;
+            }
+            .header-buttons .btn {
+                flex-grow: 1;
+                margin: 0 5px;
+            }
+            h1 { font-size: 2.5rem; }
+            .hero-section { padding-top: 150px; } /* Add padding to avoid content hiding behind the taller header */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Floating Header -->
+    <header>
+        <img src="https://originsrandomized.github.io/images/OriginsRandomizedLogo.png" alt="Origins Randomized Logo" class="logo">
+        <div class="header-buttons">
+            <!-- These buttons are smaller and in the header for quick access -->
+            <a href="YOUR_DISCORD_LINK_HERE" class="btn btn-discord" target="_blank">Join Discord</a>
+            <a href="#" id="headerDownloadBtn" class="btn btn-download disabled">Download</a>
+        </div>
+    </header>
+
+    <!-- Main Hero Section -->
+    <main>
+        <section class="hero-section">
+            <div class="hero-content">
+                <h1>Welcome to the Adventure</h1>
+                <p class="subtitle">
+                    Dive into a world of medieval fantasy, steampunk marvels, and unpredictable origins. Our modpack is designed to challenge veterans and welcome newcomers.
+                </p>
+
+                <!-- These are the main, larger Call-to-Action buttons -->
+                <div class="cta-buttons">
+                    <a href="YOUR_DISCORD_LINK_HERE" class="btn btn-discord" target="_blank">Join the Community</a>
+                    <a href="#" id="mainDownloadBtn" class="btn btn-download disabled">Download Modpack</a>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Footer -->
+    <footer>
+        <p>© 2024 Your Modpack Team Name. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Tooltip Element -->
+    <div id="tooltip">Coming Soon!</div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const tooltip = document.getElementById('tooltip');
+            
+            // Find all disabled buttons
+            const disabledButtons = document.querySelectorAll('.btn.disabled');
+
+            disabledButtons.forEach(button => {
+                // Prevent clicking
+                button.addEventListener('click', (e) => {
+                    e.preventDefault();
+                });
+                
+                // Show tooltip
+                button.addEventListener('mouseover', (e) => {
+                    tooltip.style.opacity = '1';
+                });
+
+                // Position and move tooltip
+                button.addEventListener('mousemove', (e) => {
+                    tooltip.style.left = e.pageX + 15 + 'px';
+                    tooltip.style.top = e.pageY + 15 + 'px';
+                });
+
+                // Hide tooltip
+                button.addEventListener('mouseout', (e) => {
+                    tooltip.style.opacity = '0';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
